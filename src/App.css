@@ -1,8 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Ubuntu:wght@300&display=swap");
 .App {
   /* text-align: center; */
-  margin-top: 5vh;
+  margin-top: 1vh;
   font-family: "Poppins", sans-serif;
+}
+.header_section {
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  /* align-items: ; */
+  margin-bottom: 1vh;
+}
+.header_section h1 {
+  font-size: 4vh;
+}
+.github_icon {
+  position: absolute !important;
+  right: 0vw;
+  margin-right: 1vh !important;
+  color: black !important;
+  font-size: large !important;
 }
 .suggestion_button {
   background-color: #999999 !important;
@@ -54,4 +71,17 @@
   font-weight: 500;
   font-size: 0.8rem;
   margin: auto;
+}
+.HeadTableRow {
+  position: sticky !important;
+  z-index: 10;
+  top: 0vh;
+  background-color: white;
+}
+p {
+  margin-top: auto !important;
+}
+a {
+  text-decoration: none;
+  color: black !important;
 }

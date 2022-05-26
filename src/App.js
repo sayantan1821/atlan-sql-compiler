@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import Link from "react-dom"
 import "./App.css";
 import { TextField, Button, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import { Dropdown } from "react-bootstrap";
 import { data, suggestions } from "./sqlData";
 import TableGrid from "./components/TableGrid/TableGrid";
@@ -11,6 +13,8 @@ function App() {
   const [queryText, setQueryText] = useState("");
   const [history, setHistory] = useState([]);
   const [tableData, setTableData] = useState({});
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleInputQuery = (e) => {
     setQueryText(e.target.value);
@@ -20,6 +24,8 @@ function App() {
     if (result.length === 0) result = data[2];
     setTableData(result[0]);
     setHistory([...history, queryText]);
+    setPage(0);
+    setRowsPerPage(10);
     // console.log(result);
   };
   const handleSuggestion = (sgstn) => {
@@ -34,6 +40,12 @@ function App() {
   };
   return (
     <div className="App">
+      <div className="header_section">
+        <h1>Dummy SQL Compiler</h1>
+        <IconButton aria-label="GitHub" className="github_icon">
+          <a rel="noopener noreferrer" href="https://github.com/sayantan1821/atlan-sql-compiler" target="_blank"><GitHubIcon  style={{fontSize: "30px"}}/></a>
+        </IconButton>
+      </div>
       <div className="query_section">
         <Dropdown>
           <Dropdown.Toggle className="suggestion_button" id="dropdown-basic">
@@ -68,7 +80,14 @@ function App() {
           </Button>
         </div>
         <div className="output_section">
-          {tableData.output && <TableGrid headCells={tableData.headcells} rows={tableData.output} pageNo={0} rowsPerPage={10} />}
+          {tableData.output && (
+            <TableGrid
+              headCells={tableData.headcells}
+              rows={tableData.output}
+              page_no={page}
+              rows_per_page={rowsPerPage}
+            />
+          )}
         </div>
         <div className="history_section">
           <h3>History</h3>

@@ -129,7 +129,7 @@ function EnhancedTableHead(props) {
 
   return (
     <TableHead>
-      <TableRow>
+      <TableRow className="HeadTableRow">
         {/* <TableCell padding="checkbox">
           <Checkbox
             color="primary"
@@ -236,13 +236,12 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function TableGrid({ headCells, rows, }) {
+export default function TableGrid({ headCells, rows, page_no, rows_per_page}) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = React.useState(page_no);
+  const [rowsPerPage, setRowsPerPage] = React.useState(rows_per_page);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -288,9 +287,7 @@ export default function TableGrid({ headCells, rows, }) {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
+
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -362,7 +359,7 @@ export default function TableGrid({ headCells, rows, }) {
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
+              {/* {emptyRows > 0 && (
                 <TableRow
                   style={{
                     height: (dense ? 33 : 53) * emptyRows,
@@ -370,12 +367,12 @@ export default function TableGrid({ headCells, rows, }) {
                 >
                   <TableCell colSpan={6} />
                 </TableRow>
-              )}
+              )} */}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10, 25, 50]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
