@@ -1,23 +1,94 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
+import { TextField, Button, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Dropdown } from "react-bootstrap";
+import { data, suggestions } from "./sqlData";
+import TableGrid from "./components/TableGrid/TableGrid";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+  const [queryText, setQueryText] = useState("");
+  const [history, setHistory] = useState([]);
+  const [tableData, setTableData] = useState({});
+
+  const handleInputQuery = (e) => {
+    setQueryText(e.target.value);
+  };
+  const handleSubmitQuery = () => {
+    let result = data.filter((d) => d.query === queryText);
+    if (result.length === 0) result = data[2];
+    setTableData(result[0]);
+    setHistory([...history, queryText]);
+    // console.log(result);
+  };
+  const handleSuggestion = (sgstn) => {
+    setQueryText(sgstn);
+  };
+  const handleDeleteHistory = (id) => {
+    let hist = history.filter((h, idx) => idx !== id);
+    setHistory(hist);
+  };
+  const handleReuseHistory = (q) => {
+    setQueryText(q);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="query_section">
+        <Dropdown>
+          <Dropdown.Toggle className="suggestion_button" id="dropdown-basic">
+            Suggestions
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu className="suggestions_menu">
+            {suggestions.map((sgstn, idx) => (
+              <Dropdown.Item key={idx} onClick={() => handleSuggestion(sgstn)}>
+                {sgstn}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+        <div className="query_field">
+          <TextField
+            className="query_input"
+            id="outlined-basic"
+            value={queryText}
+            onChange={handleInputQuery}
+            label="Enter Query"
+            variant="outlined"
+          />
+          <Button
+            className="query_submit"
+            onClick={handleSubmitQuery}
+            variant="contained"
+            size="large"
+            disabled={queryText === ""}
+          >
+            RUN
+          </Button>
+        </div>
+        <div className="output_section">
+          {tableData.output && <TableGrid headCells={tableData.headcells} rows={tableData.output} pageNo={0} rowsPerPage={10} />}
+        </div>
+        <div className="history_section">
+          <h3>History</h3>
+
+          {history &&
+            history.map((h, idx) => (
+              <div className="history_row history_border">
+                <p className="" key={idx} onClick={() => handleReuseHistory(h)}>
+                  {h}
+                </p>
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => handleDeleteHistory(idx)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </div>
+            ))}
+        </div>
+      </div>
     </div>
   );
 }

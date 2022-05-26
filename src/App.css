@@ -1,38 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Ubuntu:wght@300&display=swap");
 .App {
-  text-align: center;
+  /* text-align: center; */
+  margin-top: 5vh;
+  font-family: "Poppins", sans-serif;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.suggestion_button {
+  background-color: #999999 !important;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.suggestions_menu {
+  /* background-color: rgb(182, 182, 182) !important; */
+  box-shadow: 3px 6px #88888878;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.query_input {
+  width: 73vw;
+}
+.query_submit {
+  height: 55px;
+  width: 10vw;
+}
+.query_section {
+  width: 85vw;
+  margin: auto;
+}
+.query_field {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  margin: 2vh 0;
 }
-
-.App-link {
-  color: #61dafb;
+.output_section {
+  width: 85vw;
+  height: 60vh;
+  border: 1px solid rgba(0, 0, 0, 0.474);
+  border-radius: 5px;
+  margin-bottom: 5vh;
+  /* overflow: scroll; */
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.history_border {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.474);
+  padding: 1vh 0 0 0;
+}
+.history_row {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.headRows {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.TableCell pre {
+   font-family: "Poppins", sans-serif;
+  /*font-family: "Ubuntu", sans-serif; */
+  font-weight: 500;
+  font-size: 0.8rem;
+  margin: auto;
 }
