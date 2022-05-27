@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Link from "react-dom"
+import Link from "react-dom";
 import "./App.css";
 import { TextField, Button, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -21,12 +21,12 @@ function App() {
   };
   const handleSubmitQuery = () => {
     let result = data.filter((d) => d.query === queryText);
-    if (result.length === 0) result = data[2];
+    if (result.length === 0) result = [data[2]];
     setTableData(result[0]);
     setHistory([...history, queryText]);
     setPage(0);
     setRowsPerPage(10);
-    // console.log(result);
+    console.log(result);
   };
   const handleSuggestion = (sgstn) => {
     setQueryText(sgstn);
@@ -43,7 +43,13 @@ function App() {
       <div className="header_section">
         <h1>Dummy SQL Compiler</h1>
         <IconButton aria-label="GitHub" className="github_icon">
-          <a rel="noopener noreferrer" href="https://github.com/sayantan1821/atlan-sql-compiler" target="_blank"><GitHubIcon  style={{fontSize: "30px"}}/></a>
+          <a
+            rel="noopener noreferrer"
+            href="https://github.com/sayantan1821/atlan-sql-compiler"
+            target="_blank"
+          >
+            <GitHubIcon style={{ fontSize: "30px" }} />
+          </a>
         </IconButton>
       </div>
       <div className="query_section">
@@ -54,7 +60,7 @@ function App() {
 
           <Dropdown.Menu className="suggestions_menu">
             {suggestions.map((sgstn, idx) => (
-              <Dropdown.Item key={idx} onClick={() => handleSuggestion(sgstn)}>
+              <Dropdown.Item className="suggestions_item" key={idx} onClick={() => handleSuggestion(sgstn)}>
                 {sgstn}
               </Dropdown.Item>
             ))}
@@ -80,7 +86,7 @@ function App() {
           </Button>
         </div>
         <div className="output_section">
-          {tableData.output && (
+          {(tableData && tableData.output) && (
             <TableGrid
               headCells={tableData.headcells}
               rows={tableData.output}
