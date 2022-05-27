@@ -141,9 +141,9 @@ function EnhancedTableHead(props) {
             }}
           />
         </TableCell> */}
-        {headCells.map((headCell) => (
+        {headCells.map((headCell,idx) => (
           <TableCell
-            key={headCell.id}
+            key={idx}
             align="center"
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
@@ -331,7 +331,7 @@ export default function TableGrid({ headCells, rows, page_no, rows_per_page}) {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={index}
                       selected={isItemSelected}
                     >
                       {/* <TableCell padding="checkbox">

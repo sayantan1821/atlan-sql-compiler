@@ -8,7 +8,7 @@
   height: 5vh;
   display: flex;
   justify-content: center;
-  /* align-items: ; */
+  align-items: center;
   margin-bottom: 1vh;
 }
 .header_section h1 {
@@ -17,7 +17,7 @@
 .github_icon {
   position: absolute !important;
   right: 0vw;
-  margin-right: 5vh !important;
+  margin: 0 1vh !important;
   color: black !important;
   font-size: large !important;
 }
@@ -27,6 +27,12 @@
 .suggestions_menu {
   /* background-color: rgb(182, 182, 182) !important; */
   box-shadow: 3px 6px #88888878;
+}
+.suggestions_item {
+  background-color: white !important;
+}
+.suggestions_item:hover {
+  background-color: #d1d1d15a !important;
 }
 .query_input {
   width: 73vw;
@@ -50,7 +56,6 @@
   border: 1px solid rgba(0, 0, 0, 0.474);
   border-radius: 5px;
   margin-bottom: 5vh;
-  /* overflow: scroll; */
 }
 .history_border {
   border-bottom: 1px solid rgba(0, 0, 0, 0.474);
@@ -78,12 +83,22 @@
   top: 0vh;
   background-color: white;
 }
+.loading_text {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 p {
   margin-top: auto !important;
 }
 a {
   text-decoration: none;
   color: black !important;
+}
+h1 {
+  margin: auto !important;
 }
 @media only screen and (max-width: 600px) {
   .header_section h1 {

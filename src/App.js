@@ -15,6 +15,7 @@ function App() {
   const [tableData, setTableData] = useState({});
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [loading, setLoading] = useState(false);
 
   const handleInputQuery = (e) => {
     setQueryText(e.target.value);
@@ -22,11 +23,15 @@ function App() {
   const handleSubmitQuery = () => {
     let result = data.filter((d) => d.query === queryText);
     if (result.length === 0) result = [data[2]];
-    setTableData(result[0]);
+    setLoading(true);
+    setTimeout(() => {
+      setTableData(result[0]);
+      setLoading(false);
+    }, 400);
+
     setHistory([...history, queryText]);
     setPage(0);
     setRowsPerPage(10);
-    console.log(result);
   };
   const handleSuggestion = (sgstn) => {
     setQueryText(sgstn);
@@ -60,7 +65,11 @@ function App() {
 
           <Dropdown.Menu className="suggestions_menu">
             {suggestions.map((sgstn, idx) => (
-              <Dropdown.Item className="suggestions_item" key={idx} onClick={() => handleSuggestion(sgstn)}>
+              <Dropdown.Item
+                className="suggestions_item"
+                key={idx}
+                onClick={() => handleSuggestion(sgstn)}
+              >
                 {sgstn}
               </Dropdown.Item>
             ))}
@@ -86,13 +95,19 @@ function App() {
           </Button>
         </div>
         <div className="output_section">
-          {(tableData && tableData.output) && (
-            <TableGrid
-              headCells={tableData.headcells}
-              rows={tableData.output}
-              page_no={page}
-              rows_per_page={rowsPerPage}
-            />
+          {!loading ? (
+            <div>
+              {tableData.output && (
+                <TableGrid
+                  headCells={tableData.headcells}
+                  rows={tableData.output}
+                  page_no={page}
+                  rows_per_page={rowsPerPage}
+                />
+              )}
+            </div>
+          ) : (
+            <p className="loading_text">Loading...</p>
           )}
         </div>
         <div className="history_section">
@@ -100,7 +115,7 @@ function App() {
 
           {history &&
             history.map((h, idx) => (
-              <div className="history_row history_border">
+              <div className="history_row history_border" key={idx}>
                 <p className="" key={idx} onClick={() => handleReuseHistory(h)}>
                   {h}
                 </p>
