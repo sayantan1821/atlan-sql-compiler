@@ -1,12 +1,10 @@
-import React, { useState, useEffect, Suspense } from "react";
-import Link from "react-dom";
+import React, { useState, Suspense } from "react";
 import "./App.css";
 import { TextField, Button, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { Dropdown } from "react-bootstrap";
 import { data, suggestions } from "./sqlData";
-// import TableGrid from "./components/TableGrid/TableGrid";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AnimatedList } from "react-animated-list";
 

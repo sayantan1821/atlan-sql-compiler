@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Ubuntu:wght@300&display=swap");
 .App {
-  /* text-align: center; */
   margin-top: 1vh;
   font-family: "Poppins", sans-serif;
 }
@@ -25,7 +24,6 @@
   background-color: #999999 !important;
 }
 .suggestions_menu {
-  /* background-color: rgb(182, 182, 182) !important; */
   box-shadow: 3px 6px #88888878;
 }
 .suggestions_item {
@@ -72,7 +70,6 @@
 }
 .TableCell pre {
    font-family: "Poppins", sans-serif;
-  /*font-family: "Ubuntu", sans-serif; */
   font-weight: 500;
   font-size: 0.8rem;
   margin: auto;

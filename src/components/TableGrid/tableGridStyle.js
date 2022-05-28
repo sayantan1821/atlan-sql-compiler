@@ -4,8 +4,6 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     fontSize: "20pt",
-    // background: "#2D4250",
-    // color: "white",
     "& .MuiInputBase_root": {
       color: "white",
     },
@@ -15,7 +13,6 @@ export const useStyles = makeStyles((theme) => ({
     height: "8vh",
     display: "flex",
     justifyContent: "space-between",
-    // margin: "0 30px",
     padding: "0 30px",
     alignItems: "center",
     background: "#283D4A !important",
@@ -27,7 +24,6 @@ export const useStyles = makeStyles((theme) => ({
     color: "white",
   },
   Table_Container: {
-    // display: "none",
     height: "76vh",
   },
 
