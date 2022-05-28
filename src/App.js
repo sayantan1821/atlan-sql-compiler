@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "react-dom";
 import "./App.css";
 import { TextField, Button, IconButton } from "@mui/material";
@@ -6,10 +6,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { Dropdown } from "react-bootstrap";
 import { data, suggestions } from "./sqlData";
-import TableGrid from "./components/TableGrid/TableGrid";
+// import TableGrid from "./components/TableGrid/TableGrid";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { AnimatedList } from "react-animated-list";
 
 function App() {
+  const TableGrid = React.lazy(() =>
+    import("./components/TableGrid/TableGrid")
+  );
+
   const [queryText, setQueryText] = useState("");
   const [history, setHistory] = useState([]);
   const [tableData, setTableData] = useState({});
@@ -98,35 +103,42 @@ function App() {
           {!loading ? (
             <div>
               {tableData.output && (
-                <TableGrid
-                  headCells={tableData.headcells}
-                  rows={tableData.output}
-                  page_no={page}
-                  rows_per_page={rowsPerPage}
-                />
+                <Suspense fallback={<div></div>}>
+                  <TableGrid
+                    headCells={tableData.headcells}
+                    rows={tableData.output}
+                    page_no={page}
+                    rows_per_page={rowsPerPage}
+                  />
+                </Suspense>
               )}
             </div>
           ) : (
             <p className="loading_text">Loading...</p>
           )}
         </div>
-        <div className="history_section">
+        <div className="history_section" style={{ overflow: "hidden" }}>
           <h3>History</h3>
-
-          {history &&
-            history.map((h, idx) => (
-              <div className="history_row history_border" key={idx}>
-                <p className="" key={idx} onClick={() => handleReuseHistory(h)}>
-                  {h}
-                </p>
-                <IconButton
-                  aria-label="delete"
-                  onClick={() => handleDeleteHistory(idx)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </div>
-            ))}
+          <AnimatedList animation={"fade"}>
+            {history &&
+              history.map((h, idx) => (
+                <div className="history_row history_border" key={idx}>
+                  <p
+                    className=""
+                    key={idx}
+                    onClick={() => handleReuseHistory(h)}
+                  >
+                    {h}
+                  </p>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleDeleteHistory(idx)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </div>
+              ))}
+          </AnimatedList>
         </div>
       </div>
     </div>
